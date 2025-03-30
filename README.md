@@ -86,8 +86,8 @@ The data is received from kafka as a json string without column names. For worki
   - Solution: Calculate profit for each trip by adding fare_amount and tip_amount. Group the data by pickup grid cells and compute the median profit for each cell over a 15-minute window. Track empty taxis by identifying drop-offs without a subsequent pickup within 30 minutes in the same grid cell. Join both datasets (empty taxis and profit data) by grid cell to calculate the profitability for each area.
 
 #### Part 2
-  - Description: The previous query, but it must be updated whenever the top 10 changes.
-  - Solution: 
+  - Description: Top 10 profitable areas continuously updated. Keep the top 10 most profitable areas up to date based on new data.
+  - Solution : Continuously process data in 30-minute windows. Calculate the latest profitable areas based on median_profit and empty_taxis. Update the results every 5 seconds with foreachBatch. Store the most recent top 10 areas in Delta format for efficient access.
 
 
 ### License
